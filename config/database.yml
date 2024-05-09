@@ -1,0 +1,32 @@
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: rails_6_shop
+  password: 1234
+  host: localhost
+
+# sudo -u postgres psql
+# create user "rails_6_shop" with password '1234';
+# create database "rails_6_shop" owner "rails_6_shop"; 
+# rails db:migrate RAILS_ENV=development
+
+development:
+  <<: *default
+  database: rails_6_shop
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: rails_6_shop_test
+
+production:
+  <<: *default
+  database: rails_6_shop_production
